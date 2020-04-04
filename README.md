@@ -4,8 +4,8 @@
 ### Запуск ФронтЭнда
 ```
 cd FrontEnd
-yarn install or npm install
-yarn serve or npm run serve
+yarn install или npm install
+yarn serve или npm run serve
 ```
 
 ### Запуск Бэкэнда
