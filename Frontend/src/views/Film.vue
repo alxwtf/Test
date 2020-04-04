@@ -71,13 +71,13 @@
                 max-rows="9"
                 :class="{'is-invalid':$v.reviewText.$error}"
               />
-              <b-form-invalid-feedback v-if="!$v.reviewText.required">Поле не может быть пустым</b-form-invalid-feedback>
               <b-input-group-append>
-                <b-form-invalid-feedback
-                  v-if="!$v.form.ConfirmPassword.minLength"
-                >Отзыв должен состоять минимум из {{ $v.reviewText.$params.minLength.min }} символов</b-form-invalid-feedback>
                 <b-button variant="dark" @click="postReview()" :disabled="loading">Опубликовать</b-button>
               </b-input-group-append>
+              <b-form-invalid-feedback v-if="!$v.reviewText.required">Поле не может быть пустым</b-form-invalid-feedback>
+              <b-form-invalid-feedback
+                v-if="!$v.reviewText.minLength"
+              >Отзыв должен состоять минимум из {{ $v.reviewText.$params.minLength.min }} символов</b-form-invalid-feedback>
             </b-input-group>
           </div>
           <p v-else>Вы уже оставляли Отзыв</p>
@@ -97,7 +97,7 @@
 <script>
 import axios from "axios";
 import { mapGetters, mapState } from "vuex";
-import { required, minLenght } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -116,10 +116,10 @@ export default {
     };
   },
   validations: {
-    reviewText: {
-      required,
-      minLenght: minLenght(10)
-    }
+    reviewText: { 
+      required, 
+      minLength: minLength(10) 
+     }
   },
   computed: {
     ...mapGetters(["IsAuthenticated"]),
